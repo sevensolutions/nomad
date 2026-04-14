@@ -192,8 +192,12 @@ export default class TopoVizNode extends Component {
     const cpuReservedRaw = this.args.node.node?.reserved?.cpu;
     const memoryReservedRaw = this.args.node.node?.reserved?.memory;
 
-    const cpuReservedPercent = cpuReservedRaw ? cpuReservedRaw / this.args.node.cpu : 0;
-    const memoryReservedPercent = memoryReservedRaw ? memoryReservedRaw / this.args.node.memory : 0;
+    const cpuReservedPercent = cpuReservedRaw
+      ? cpuReservedRaw / this.args.node.cpu
+      : 0;
+    const memoryReservedPercent = memoryReservedRaw
+      ? memoryReservedRaw / this.args.node.memory
+      : 0;
 
     const cpuRemainder = {
       x: cpuOffset * width + 0.5,
@@ -207,14 +211,20 @@ export default class TopoVizNode extends Component {
       ),
     };
 
-    const cpuReserved = cpuReservedPercent > 0 ? {
-        x: (1 - cpuReservedPercent) * width + 0.5,
-        width: Math.max(cpuReservedPercent * width - 0.5, 0),
-      } : null;
-    const memoryReserved = memoryReservedPercent > 0 ? {
-        x: (1 - memoryReservedPercent) * width + 0.5,
-        width: Math.max(memoryReservedPercent * width - 0.5, 0),
-      } : null;
+    const cpuReserved =
+      cpuReservedPercent > 0
+        ? {
+            x: (1 - cpuReservedPercent) * width + 0.5,
+            width: Math.max(cpuReservedPercent * width - 0.5, 0),
+          }
+        : null;
+    const memoryReserved =
+      memoryReservedPercent > 0
+        ? {
+            x: (1 - memoryReservedPercent) * width + 0.5,
+            width: Math.max(memoryReservedPercent * width - 0.5, 0),
+          }
+        : null;
 
     return {
       cpu,

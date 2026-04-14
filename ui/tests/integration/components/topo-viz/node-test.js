@@ -459,7 +459,10 @@ module('Integration | Component | TopoViz::Node', function (hooks) {
 
     await render(commonTemplate);
 
-    assert.ok(TopoVizNode.reservedMemoryRect, 'reserved memory segment is rendered');
+    assert.ok(
+      TopoVizNode.reservedMemoryRect,
+      'reserved memory segment is rendered'
+    );
     assert.ok(TopoVizNode.reservedCpuRect, 'reserved cpu segment is rendered');
   });
 
