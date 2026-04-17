@@ -26,44 +26,44 @@
         @onNodeSelect={{this.showNodeDetails}} />
   </FlexMasonry>
 
-  <div class="chart-tooltip is-absolute {{if (or this.highlightAllocation this.highlightReserved) "active" "inactive"}}" style={{this.tooltipStyle}}>
-    {{#if this.highlightAllocation}}
-      {{#let this.highlightAllocation as |allocation|}}
-        <ol class="is-static">
+  <div class="chart-tooltip is-absolute {{if this.highlightAllocation "active" "inactive"}}" style={{this.tooltipStyle}}>
+    {{#let this.highlightAllocation as |allocation|}}
+      <ol class="is-static">
+        <li>
+          <span class="label">Job</span>
+          <span class="value">{{allocation.allocation.job.name}}/{{allocation.allocation.taskGroupName}}</span>
+        </li>
+        {{#if this.system.shouldShowNamespaces}}
           <li>
-            <span class="label">Job</span>
-            <span class="value">{{allocation.allocation.job.name}}/{{allocation.allocation.taskGroupName}}</span>
+            <span class="label">Namespace</span>
+            <span class="value">{{allocation.allocation.job.namespace.name}}</span>
           </li>
-          {{#if this.system.shouldShowNamespaces}}
-            <li>
-              <span class="label">Namespace</span>
-              <span class="value">{{allocation.allocation.job.namespace.name}}</span>
-            </li>
-          {{/if}}
-          <li>
-            <span class="label">Memory</span>
-            <span class="value">{{format-scheduled-bytes allocation.memory start="MiB"}}</span>
-          </li>
-          <li>
-            <span class="label">CPU</span>
-            <span class="value">{{format-scheduled-hertz allocation.cpu}}</span>
-          </li>
-        </ol>
-      {{/let}}
-    {{else if this.highlightReserved}}
-      {{#let this.highlightReserved as |reserved|}}
-        <ol class="is-static">
-          <li>
-            <span class="label">Memory</span>
-            <span class="value">{{format-scheduled-bytes reserved.memory start="MiB"}} reserved</span>
-          </li>
-          <li>
-            <span class="label">CPU</span>
-            <span class="value">{{format-scheduled-hertz reserved.cpu}} reserved</span>
-          </li>
-        </ol>
-      {{/let}}
-    {{/if}}
+        {{/if}}
+        <li>
+          <span class="label">Memory</span>
+          <span class="value">{{format-scheduled-bytes allocation.memory start="MiB"}}</span>
+        </li>
+        <li>
+          <span class="label">CPU</span>
+          <span class="value">{{format-scheduled-hertz allocation.cpu}}</span>
+        </li>
+      </ol>
+    {{/let}}
+  </div>
+
+  <div class="chart-tooltip is-absolute {{if this.highlightReserved "active" "inactive"}}" style={{this.tooltipStyle}}>
+    {{#let this.highlightReserved as |reserved|}}
+      <ol class="is-static">
+        <li>
+          <span class="label">Memory</span>
+          <span class="value">{{format-scheduled-bytes reserved.memory start="MiB"}} reserved</span>
+        </li>
+        <li>
+          <span class="label">CPU</span>
+          <span class="value">{{format-scheduled-hertz reserved.cpu}} reserved</span>
+        </li>
+      </ol>
+    {{/let}}
   </div>
 
   {{#if this.activeAllocation}}
